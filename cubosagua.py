@@ -63,6 +63,7 @@ class juegoCubos:
         print('  (L)lenar un cubo')
         print('  (V)aciar un cubo')
         print('  (M)over el agua de un cubo a otro')
+        print('  (T)Llenar todos los cubos')
         print('  (VT) Vaciar todos los cubos')
         print('  (S)alir')
 
@@ -72,7 +73,7 @@ class juegoCubos:
                 print('Gracias por jugar!')
                 sys.exit()
 
-            if move in ('L', 'V', 'M','VT'):
+            if move in ('L', 'V', 'M','LT','VT'):
                 return move
 
     def selecCubo(self, mensaje):
@@ -86,6 +87,12 @@ class juegoCubos:
     def llenarCubo(self, cuboOrigen):
         cuboOrigenTam = int(cuboOrigen)
         self.aguaEnCubos[cuboOrigen] = cuboOrigenTam
+        self.pasos += 1
+
+    def llenarTodosCubos(self):
+        cubosRellenos = ['8', '5', '3']
+        for i in range(0, 3):
+            self.aguaEnCubos[cubosRellenos[i]] = int(cubosRellenos[i])
         self.pasos += 1
 
     def vaciarTodosCubos(self):
@@ -125,6 +132,8 @@ class juegoCubos:
                 cuboOrigen = self.selecCubo('Selecciona el cubo ORIGEN 8, 5, 3 o SALIR:')
                 cuboDestino = self.selecCubo('Selecciona el cubo DESTINO 8, 5, 3 o SALIR:')
                 self.moverCubo(cuboOrigen, cuboDestino)
+            elif opcion == "LT":
+                self.llenarTodosCubos()
             elif opcion == "VT":
                 self.vaciarTodosCubos()
             self.mostrarEstadoCubos()
